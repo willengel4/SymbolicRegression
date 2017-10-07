@@ -17,6 +17,9 @@ public class CrossoverHandler
 		offspring1 = parent1.copy();
 		offspring2 = parent2.copy();
 		
+		System.out.println("Parent1: " + parent1.getRoot().getExpression());
+		System.out.println("Parent2: " + parent2.getRoot().getExpression());
+		
 		int crossoverPoint1 = Helper.random.nextInt(parent1.getNumSymbols());
 		int crossoverPoint2 = Helper.random.nextInt(parent2.getNumSymbols());
 		

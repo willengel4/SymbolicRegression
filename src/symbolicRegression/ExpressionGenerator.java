@@ -17,16 +17,19 @@ public class ExpressionGenerator
 		currentId = 0;
 	}
 	
+	public Expression generateSymbolicExpression(Symbol specificRoot)
+	{
+		currentId = 0;
+		specificRoot.setId(currentId++);
+		create(specificRoot, 1);
+		return new Expression(specificRoot, currentId);
+	}
+	
 	public Expression generateSymbolicExpression()
 	{
 		int randomIndex = Helper.random.nextInt(functionSet.size());
-		currentId = 0;
-		Symbol root = functionSet.get(randomIndex).create();
-		root.setId(currentId++);
-		
-		create(root, 1);
-		
-		return new Expression(root, currentId);
+		Symbol root = functionSet.get(randomIndex).create();				
+		return generateSymbolicExpression(root);
 	}
 	
 	public void create(Symbol r, int depth)

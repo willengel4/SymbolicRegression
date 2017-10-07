@@ -2,6 +2,14 @@ package symbolicRegression;
 
 public class Decision extends Symbol
 {
+	private int numOptions;
+	
+	public Decision(int numOptions)
+	{
+		super();
+		this.numOptions = numOptions;
+	}
+	
 	public double evaluate() 
 	{
 		int maxIndex = 0;
@@ -15,12 +23,12 @@ public class Decision extends Symbol
 
 	public Symbol create() 
 	{
-		return new Decision();
+		return new Decision(numOptions);
 	}
 
 	public int getMinChildren() 
 	{
-		return 2;
+		return numOptions;
 	}
 
 	public String getSymbol() 

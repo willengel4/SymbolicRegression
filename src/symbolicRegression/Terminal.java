@@ -14,6 +14,7 @@ public class Terminal extends Symbol
 		return value;
 	}
 	
+	/* Terminals should be shallow copied */
 	public Terminal create()
 	{
 		return new Terminal(value);
@@ -27,5 +28,15 @@ public class Terminal extends Symbol
 	public String getSymbol()
 	{
 		return value +"";
+	}
+	
+	public void setValue(double value)
+	{
+		this.value = value;
+	}
+	
+	public double getValue()
+	{
+		return value;
 	}
 }
