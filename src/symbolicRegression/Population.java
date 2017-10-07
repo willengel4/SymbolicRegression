@@ -29,17 +29,25 @@ public class Population
 	
 	public void evaluatePopulation()
 	{
-		double fitnessSum = 0.0;
+		double maxFitness = -1;
 		
 		for(Genome g : genomes)
 		{
 			g.setFitness(evaluator.evaluate(g.getExpression()));
-			fitnessSum += g.getFitness();
+			
+			if(g.getFitness() > maxFitness)
+				maxFitness = g.getFitness();
+			
+
+		}
+		
+		for(Genome g : genomes)
+		{
+			g.setFitness(maxFitness - g.getFitness());
+
 			if(populationBest == null || g.getFitness() > populationBest.getFitness())
 				populationBest = g;
 		}
-		
-		System.out.println("avg fitness: " + (fitnessSum / (double)genomes.size()));
 	}
 	
 	public Population createNextGeneration()
@@ -58,14 +66,8 @@ public class Population
 			}
 			else
 			{
-				Genome g1 = null;
-				Genome g2 = null;
-				
-				while(g1 == g2)
-				{
-					g1 = selectGenome();
-					g2 = selectGenome();
-				}
+				Genome g1 = selectGenome();
+				Genome g2 = selectGenome();
 				
 				CrossoverHandler crossoverHandler = new CrossoverHandler(g1.getExpression(), g2.getExpression());
 				crossoverHandler.performCrossover();
@@ -100,6 +102,11 @@ public class Population
 		}
 		
 		return null;
+	}
+	
+	public Genome getBestGenome()
+	{
+		return populationBest;
 	}
 	
 	public void addGenome(Genome g)
