@@ -1,12 +1,14 @@
 package symbolicRegression;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 public class ExampleEvaluator extends Evaluator
 {
 	private ArrayList<Double> x1s;
 	private ArrayList<Double> x2s;
 	private ArrayList<Double> ys;
+	private Hashtable<String, Double> currentVariables;
 	
 	public ExampleEvaluator()
 	{
@@ -31,23 +33,22 @@ public class ExampleEvaluator extends Evaluator
 		x1s.add(new Double(1));
 		x2s.add(new Double(10));
 		ys.add(new Double(11));
+		
+		currentVariables = new Hashtable<String, Double>();
 	}
 	
 	public double evaluate(Expression e) 
-	{
-		e.synchVariables(e.getRoot());
-		
+	{		
 		double totalError = 0.0;
 		
 		for(int i = 0; i < ys.size(); i++)
 		{
-			for(Variable v : e.getVariables())
-			{
-				if(v.getVariableId().equals("x1"))
-					v.setValue(x1s.get(i));
-				else if(v.getVariableId().equals("x2"))
-					v.setValue(x2s.get(i));
-			}
+			System.out.println("SETTING X1 TO: " + x1s.get(i));
+			System.out.println("SETTING X2 TO: " + x2s.get(i));
+			
+			currentVariables.put("x1", x1s.get(i));
+			currentVariables.put("x2", x2s.get(i));
+			
 			double prediction = e.getRoot().evaluate();
 			double err = Math.abs(prediction - ys.get(i));
 			totalError += err;
@@ -57,5 +58,10 @@ public class ExampleEvaluator extends Evaluator
 			totalError = 200;
 		
 		return totalError;
+	}
+
+	public double getVariableValue(String variableId) 
+	{
+		return currentVariables.get(variableId);
 	}
 }

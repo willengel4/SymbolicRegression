@@ -6,23 +6,13 @@ public class Expression
 {
 	private Symbol root;
 	private int numSymbols;
-	private ArrayList<Variable> variables;
 	
 	public Expression(Symbol root, int numSymbols)
 	{
 		this.root = root;
 		this.numSymbols = numSymbols;
-		variables = new ArrayList<Variable>();
 	}
 	
-	public void synchVariables(Symbol r)
-	{
-		if(r instanceof Variable)
-			variables.add((Variable)r);
-		
-		for(Symbol c : r.getChildren())
-			synchVariables(c);
-	}
 	
 	private void iterateAndCount(Symbol node)
 	{
@@ -76,10 +66,5 @@ public class Expression
 		}
 		
 		return null;
-	}
-	
-	public ArrayList<Variable> getVariables()
-	{
-		return variables;
 	}
 }

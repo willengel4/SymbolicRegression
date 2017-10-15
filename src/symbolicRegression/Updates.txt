@@ -1,0 +1,23 @@
+Updates to be made:
+
+1. Support of ephemeral constants
+
+2. Addition of more functions:
+	trigonometric
+	log
+	if [arg1] then [arg2] else [arg3]
+
+3. Support for multiple fitness measures:
+	Raw
+	Standardized
+	Normalized
+	Adjusted
+	
+4. Support for secondary genetic operations:
+	Mutation
+	Permutation
+	Editing
+	Encapsulation
+	Decimation
+	
+5. Refactoring
