@@ -1,6 +1,7 @@
 package symbolicRegression;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Population 
 {
@@ -35,6 +36,7 @@ public class Population
 		{
 			g.setFitness(evaluator.evaluate(g.getExpression()));
 			
+			
 			if(g.getFitness() > maxFitness)
 				maxFitness = g.getFitness();
 			
@@ -45,6 +47,7 @@ public class Population
 		{
 			g.setFitness(maxFitness - g.getFitness());
 
+			
 			if(populationBest == null || g.getFitness() > populationBest.getFitness())
 				populationBest = g;
 		}
@@ -69,13 +72,29 @@ public class Population
 				Genome g1 = selectGenome();
 				Genome g2 = selectGenome();
 				
-				CrossoverHandler crossoverHandler = new CrossoverHandler(g1.getExpression(), g2.getExpression());
-				crossoverHandler.performCrossover();
-				
-				nextGeneration.addGenome(new Genome(crossoverHandler.getOffspring1()));
-				nextGeneration.addGenome(new Genome(crossoverHandler.getOffspring2()));
+				try
+				{
 
-				i++;	
+					
+
+					
+					CrossoverHandler crossoverHandler = new CrossoverHandler(g1.getExpression(), g2.getExpression());
+					crossoverHandler.performCrossover();
+					
+					nextGeneration.addGenome(new Genome(crossoverHandler.getOffspring1()));
+					nextGeneration.addGenome(new Genome(crossoverHandler.getOffspring2()));
+
+					i++;	
+				}
+				catch(Exception e)
+				{
+					System.out.println(g1);
+					System.out.println(g2);
+					
+					Scanner s = new Scanner(System.in);
+					s.next();
+				}
+
 			}			
 		}
 		

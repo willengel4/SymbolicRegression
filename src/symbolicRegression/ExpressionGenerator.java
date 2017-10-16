@@ -6,6 +6,7 @@ public class ExpressionGenerator
 {
 	private ArrayList<Symbol> functionSet;
 	private ArrayList<Terminal> terminalSet;
+	private ArrayList<Symbol> combinedSet;
 	private int maxDepth;
 	private int currentId;
 	
@@ -13,6 +14,7 @@ public class ExpressionGenerator
 	{
 		functionSet = new ArrayList<Symbol>();
 		terminalSet = new ArrayList<Terminal>();
+		combinedSet = new ArrayList<Symbol>();
 		maxDepth = 10;
 		currentId = 0;
 	}
@@ -34,41 +36,54 @@ public class ExpressionGenerator
 	
 	public void create(Symbol r, int depth)
 	{
+		if(r instanceof Terminal || depth > maxDepth)
+			return;
+		
 		for(int i = 0; i < r.getMinChildren(); i++)
 		{
-			int randomIndex;
-			if(depth < maxDepth)
-				randomIndex = Helper.random.nextInt(functionSet.size() + terminalSet.size());
-			else
-				randomIndex = Helper.random.nextInt(terminalSet.size()) + functionSet.size();
-			
-			if(randomIndex < functionSet.size() && depth < maxDepth)
-			{
-				Symbol child = functionSet.get(randomIndex).create();
-				child.setId(currentId++);
-				child.setParent(r);
-				r.addSymbol(child);
-				create(child, depth + 1);
-			}
-			else
-			{
-				int termIndex = randomIndex - functionSet.size();
-				Terminal t = terminalSet.get(termIndex).create();
-				t.setParent(r);
-				t.setId(currentId++);
-				r.addSymbol(t);
-			}
+			Symbol newSymbol = chooseASymbol(r, depth);
+			newSymbol.setId(currentId++);
+			newSymbol.setParent(r);
+			r.addSymbol(newSymbol);
+			create(newSymbol, depth + 1);
 		}
+	}
+	
+	private Symbol chooseASymbol(Symbol r, int depth)
+	{
+		if(depth == maxDepth)
+		{
+			int randomIndex = Helper.random.nextInt(terminalSet.size() + 1);
+			Symbol newSymbol = randomIndex < terminalSet.size() ? terminalSet.get(randomIndex).create() : r.createEphemeralChild();
+			return newSymbol;
+		}
+		else
+		{
+			int randomIndex = Helper.random.nextInt(combinedSet.size() + 1);
+			Symbol newSymbol = randomIndex < combinedSet.size() ? combinedSet.get(randomIndex).create() : r.createEphemeralChild();
+			return newSymbol;
+		}		
+	}
+		
+	private void synchCombinedSet()
+	{
+		combinedSet.clear();
+		for(Symbol s : functionSet)
+			combinedSet.add(s);
+		for(Terminal s : terminalSet)
+			combinedSet.add(s);
 	}
 	
 	public void addToFunctionSet(Symbol f)
 	{
 		functionSet.add(f);
+		synchCombinedSet();
 	}
 	
 	public void addToTerminalSet(Terminal t)
 	{
 		terminalSet.add(t);
+		synchCombinedSet();
 	}
 	
 	public void setMaxDepth(int m)

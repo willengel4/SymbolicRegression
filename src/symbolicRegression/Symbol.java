@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public abstract class Symbol 
 {
-	/* The inputs to this symbol */
 	protected ArrayList<Symbol> children;
 	protected int id;
 	protected Symbol parent;
@@ -19,14 +18,13 @@ public abstract class Symbol
 	public abstract Symbol create();
 	public abstract int getMinChildren();
 	public abstract String getSymbol();
+	public abstract Terminal createEphemeralChild();
 	
-	/* Returns the children */
 	public ArrayList<Symbol> getChildren()
 	{
 		return children;
 	}
 	
-	/* Deep copy of the Symbol */
 	public Symbol copy()
 	{
 		Symbol cpy = create();
@@ -42,7 +40,6 @@ public abstract class Symbol
 		return cpy;
 	}
 	
-	/* Adds s */
 	public void addSymbol(Symbol s)
 	{
 		children.add(s);

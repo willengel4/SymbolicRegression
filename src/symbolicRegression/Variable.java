@@ -19,7 +19,6 @@ public class Variable extends Terminal
 	
 	public double evaluate()
 	{
-		System.out.println(variableId + " = " + evaluator.getVariableValue(variableId));
 		return evaluator.getVariableValue(variableId);
 	}
 	
@@ -28,7 +27,6 @@ public class Variable extends Terminal
 		return variableId;
 	}
 	
-	/* Terminals should be shallow copied */
 	public Variable create()
 	{
 		return new Variable(getValue(), variableId, evaluator);

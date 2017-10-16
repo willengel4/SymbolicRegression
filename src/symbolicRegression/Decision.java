@@ -1,6 +1,6 @@
 package symbolicRegression;
 
-public class Decision extends Symbol
+public class Decision extends NumericalSymbol
 {
 	private int numOptions;
 	

@@ -15,9 +15,7 @@ public class ExampleEvaluator extends Evaluator
 		x1s = new ArrayList<Double>();
 		x2s = new ArrayList<Double>();
 		ys = new ArrayList<Double>();
-		
-		//y = x1^2 + x2
-		
+				
 		x1s.add(new Double(4));
 		x2s.add(new Double(3));
 		ys.add(new Double(19));
@@ -42,21 +40,19 @@ public class ExampleEvaluator extends Evaluator
 		double totalError = 0.0;
 		
 		for(int i = 0; i < ys.size(); i++)
-		{
-			System.out.println("SETTING X1 TO: " + x1s.get(i));
-			System.out.println("SETTING X2 TO: " + x2s.get(i));
-			
+		{			
 			currentVariables.put("x1", x1s.get(i));
 			currentVariables.put("x2", x2s.get(i));
 			
-			double prediction = e.getRoot().evaluate();
+			double prediction = e.getRoot().evaluate();			
 			double err = Math.abs(prediction - ys.get(i));
+						
 			totalError += err;
 		}
-		
+				
 		if(totalError > 200)
 			totalError = 200;
-		
+				
 		return totalError;
 	}
 

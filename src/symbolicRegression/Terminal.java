@@ -39,4 +39,9 @@ public class Terminal extends Symbol
 	{
 		return value;
 	}
+
+	public Terminal createEphemeralChild() 
+	{
+		return null;
+	}
 }

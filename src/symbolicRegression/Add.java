@@ -1,6 +1,6 @@
 package symbolicRegression;
 
-public class Add extends Symbol
+public class Add extends NumericalSymbol
 {
 	public double evaluate() 
 	{

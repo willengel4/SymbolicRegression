@@ -1,6 +1,6 @@
 package symbolicRegression;
 
-public class Max extends Symbol
+public class Max extends NumericalSymbol
 {
 	public double evaluate() 
 	{
