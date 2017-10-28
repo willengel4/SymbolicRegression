@@ -1,21 +1,16 @@
 Updates to be made:
 
-1. Addition of more functions:
-	trigonometric
-	log
-	if [arg1] then [arg2] else [arg3]
-
-2. Support for multiple fitness measures:
+1. Support for multiple fitness measures:
 	Raw
 	Standardized
 	Normalized
 	Adjusted
 	
-3. Support for secondary genetic operations:
+2. Support for secondary genetic operations:
 	Mutation
 	Permutation
 	Editing
 	Encapsulation
 	Decimation
 	
-5. Refactoring
+3. Refactoring

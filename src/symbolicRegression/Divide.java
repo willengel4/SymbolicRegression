@@ -3,10 +3,7 @@ package symbolicRegression;
 public class Divide extends NumericalSymbol
 {
 	public double evaluate()
-	{
-		if(children.get(1).evaluate() == 0)
-			return 0;
-		
+	{		
 		if(Math.abs(children.get(1).evaluate()) < 0.001)
 			return 0;
 		

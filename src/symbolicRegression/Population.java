@@ -36,18 +36,14 @@ public class Population
 		{
 			g.setFitness(evaluator.evaluate(g.getExpression()));
 			
-			
 			if(g.getFitness() > maxFitness)
 				maxFitness = g.getFitness();
-			
-
 		}
 		
 		for(Genome g : genomes)
 		{
 			g.setFitness(maxFitness - g.getFitness());
 
-			
 			if(populationBest == null || g.getFitness() > populationBest.getFitness())
 				populationBest = g;
 		}
@@ -75,9 +71,6 @@ public class Population
 				try
 				{
 
-					
-
-					
 					CrossoverHandler crossoverHandler = new CrossoverHandler(g1.getExpression(), g2.getExpression());
 					crossoverHandler.performCrossover();
 					
